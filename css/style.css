@@ -1,0 +1,403 @@
+*{
+	box-sizing:border-box;
+	font-family: sans-serif !important;
+	font-size: 12px !important;
+}
+html,body{
+	margin: 0;
+	padding: 0;
+}
+body{
+	width: 100%
+}
+a{
+	text-decoration: none !important;
+}
+a:visited{
+	color:#333;
+}
+.whileload{
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,.3);
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+}
+.whileload img{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+.container-main{
+	max-height: 100%;
+	margin: 0 auto;
+	width: 1200px;
+}
+.header{
+	background: #0FB0AA;
+	height: 40px;
+	padding: 7px;
+	position: relative;
+}
+.header div:nth-child(1){
+	float: left;
+	width: 90%;
+}
+.header div:nth-child(2){
+	float: left;
+	width: 10%;
+}
+.left-pane, .center-pane{
+	padding: 15px;
+}
+.left-pane{
+	background: #fff;
+	border-right: 1px solid #aaa;
+	/*border:2px solid #333;*/
+	float: left;
+	height: calc(100% - 50px);
+	text-align: center;
+	width:280px;
+}
+.device-name{
+    margin-top: 15px;
+    height: 45px;
+}
+.device-name a{
+	color: #333;
+}
+.device-desc{
+	line-height: 20px;
+	height: 225px;
+    margin: 0 auto;
+    text-align: left;
+    width: 180px;
+}
+.left-pane .device-image{
+    height: 280px;
+    padding: 10px 0px;
+}
+.left-pane .device-image img{
+	width: 65%;
+}
+.device-btn{
+	position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+	margin: 10px auto;
+	z-index: 999;
+}
+.device-btn button{
+    width: 100px;
+    border: 0;
+    background: #0FB0AA;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: 0px 2px 3px 0px #1D1D1D;
+}
+.center-pane{
+	background: #fff;
+	/*border:2px solid #333;*/
+	float: left;
+	height: calc(100% - 50px);
+	overflow-y:hidden;
+	padding: 15px;
+	width:calc(100% - 280px);
+}
+.center-pane .device-image img{
+    height: 160px;
+    max-width: 238px;
+}
+.souq-device{
+	float: left;
+	height: 50%;
+	padding: 15px;
+	position: relative;
+	width: calc(100%/4);
+}
+.souq-device .device-placeholder img{
+    width: 75px;
+    height: 139px;
+    margin-top: 0px;
+}
+.souq-device .device-name{
+	color: #434396;
+	height: 60px;
+}
+.souq-device .device-price{
+	height: 35px;
+	margin-top: 11px;
+}
+.souq-device .device-price-old, .souq-device .device-price-new{
+	color: #666;
+}
+/*.right-pane{
+	background: #fff;
+	float: left;
+	height: calc(100% - 50px);
+	overflow-y:scroll;
+	width:300px;
+}
+.right-pane .souq-device{
+    float: left;
+    height: 280px;
+    padding: 15px;
+    width: 100%;
+}*/
+.check-overlay{
+	display:none;
+    position: absolute;
+    background-image: url(../img/checkmark.png);
+    background-size: 100px;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+.cat-select select{
+	background-color: #fff;
+    border-radius: 3px;
+    color: #666;
+    height: 25px;  
+}
+.cat-select button{
+	height: 24px;
+    border: 0;
+    width: 23px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #0FB0AA;
+    background: #FFF;
+    box-shadow: 0 1px 4px -1px #616161;
+}
+
+.page-jump{
+	text-align: left;
+}
+.page-jump input, .page-jump button{
+	border:1px solid #aaa;
+}
+.page-jump input{
+	height: 25px;
+	padding: 0 5px;
+}
+.page-jump button{
+	background-color: #fff;
+	height: 25px;
+}
+#pagination{
+    padding: 10px 0;
+}
+
+.upload-dialog{
+	display: none;
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 50%;
+	height: 50%;
+	padding: 16px;
+	border: 16px solid #84C3BE;
+	background-color: white;
+	z-index:1002;
+	overflow: auto;
+}
+.login-dialog{
+	display: none;
+	position: absolute;
+    top: 55px;
+    right: 0px;
+    padding: 16px;
+    background-color: #565656;
+    z-index: 1002;
+    overflow: auto;
+    box-shadow: 1px 2px 4px -2px #333;
+    width: 200px;
+}
+.login-dialog input{
+    height: 30px;
+    padding: 10px;
+    border: 0;
+    border-radius: 3px;
+    width: 100%;
+    margin:5px 0;
+}
+.login-dialog button{
+	width: 100%;
+    height: 30px;
+    background: #0FB0AA;
+    border: 0;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 3px;
+    margin: 5px 0;
+}
+
+.loading{
+	position: absolute;
+	top: 40%;
+	left: 45%;
+	width: 2%;
+	height: 2%;
+	padding: 16px;
+	border: 16px solid #84C3BE;
+	background-color: white;
+	z-index:1002;
+	
+}
+
+/* Preloader */
+
+#preloader {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:#fff; /* change if the mask should have another color then white */
+    z-index:99; /* makes sure it stays on top */
+}
+
+#status {
+    width:200px;
+    height:200px;
+    position:absolute;
+    left:50%; /* centers the loading animation horizontally one the screen */
+    top:50%; /* centers the loading animation vertically one the screen */
+    background-image:url(../img/status.gif); /* path to your loading animation */
+    background-repeat:no-repeat;
+    background-position:center;
+    margin:-100px 0 0 -100px; /* is width and height divided by two */
+}
+
+#login{
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 0;
+    width: 100px;
+    height: 25px;
+    outline: 0;
+    position: absolute;
+    top: 15px;
+    box-shadow: 0px 1px 4px -1px #333;
+    color: #0FB0AA;
+    font-weight: 700;
+}
+.dropdown{
+    cursor: pointer;
+    position: absolute;
+    top: 7px;
+    right: 45px;
+    padding: 6px 15px;
+}
+.dropdown p{
+	margin: 0 !important;
+    padding: 0 15px 0 0 !important;
+	color: #fff;
+	font-weight: 600;
+	padding-bottom: 10px;
+}
+.dropdown ul li{
+	color: #fff !important;
+}
+.dropdown-content{
+    background: #565656;
+    box-shadow: 1px 1px 5px 0px #333;
+    position: absolute;
+    top: 22px;
+    right: 0px;
+    display: none;
+    list-style-type: none;
+    width: 200px;
+    z-index: 999;
+    padding: 0;
+  
+}
+.dropdown-content li{
+	padding: 5px 15px;
+	color: #fff;
+	line-height: 1.4;
+}
+.dropdown-content li:hover{
+	background: #888;
+}
+.dropdown-content2{
+	background: #7D7D7D;;
+	display: none;
+	list-style-type: none;
+	padding-bottom: 5px;
+    padding-top: 5px;
+	width: 100%;
+	z-index:999;
+	padding-left: 15px;
+	line-height: 1 !important;
+}
+.dropdown-content2:hover{
+	background: #aaa;
+}
+.dropdown-content2:hover .dropdown-content2 a{
+	color: #333 !important;
+}
+
+.dropdown-content2 li a{
+	color: #fff !important;
+}
+
+.page-jump{
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.gear{
+   	position: absolute;
+    top: 4px;
+    width: 18px;
+    right: 0;
+}
+.down-caret{
+	width: 8px;
+}
+.hr-menu{
+    width: 85%;
+    height: 1px;
+    border: 0;
+    background: #aaa;
+    padding: 0;
+    margin: 0 auto;
+}
+.login-box{
+	display: block;
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 16px;
+    background-color: #565656;
+    
+    box-shadow: 1px 2px 4px -2px #333;
+    width: 400px;
+}
+.login-box input{
+    height: 30px;
+    padding: 10px;
+    border: 0;
+    border-radius: 3px;
+    width: 100%;
+    margin:5px 0;
+}
+.login-box button{
+	width: 100%;
+    height: 30px;
+    background: #0FB0AA;
+    border: 0;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 3px;
+    margin: 5px 0;
+}

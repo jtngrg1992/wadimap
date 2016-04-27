@@ -1,0 +1,24 @@
+<?php
+	echo "hey";
+	include('archive/connection.php');
+	if($_SERVER['REQUEST_METHOD']=="GET"){
+		$response['success']="false";
+		$response['data']=0;
+		$keys=array_keys($_GET);
+		foreach($keys as $k){
+			if($k=='catlist'){  //searching for paintings using artist name as criteria
+				$response['success']="true";
+				$source=$_GET['source'];
+				$sql="select distinct Category from $source";
+				echo $sql;
+				// $response['data']=array();
+				// foreach($artist as $name){
+				// 	$search=array('ARTIST'=>$name);
+				// 	$dat=$coll->find($search);
+				// 	foreach($dat as $id=>$value){
+				// 	$response['data'][]=$value;
+				// 	}
+		 }
+		
+				}//--ends--
+			?>

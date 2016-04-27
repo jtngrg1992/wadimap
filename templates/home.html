@@ -1,0 +1,39 @@
+<div class="left-pane">
+		
+		<div class="device-name">
+			{{wadi.Name }}
+		</div>
+		<div class="device-image">
+			<img src={{wadi.Image}}>
+		</div>
+		<div class="device-desc">
+			SKU: {{wadi.Device_ID}}
+			Category: {{wadi.Category}}
+		</div>
+		<div class="device-btn">
+			
+		<button id="next-device" ng-click='jumpToNext()'>
+			Next
+		</button>
+		</div>
+		<div id="pagination">
+		{{jumpID}}/	{{count}}
+		</div>
+	</div>
+	<div class="center-pane">
+		<div  class='souq-device' ng-repeat="x in souq"  ng-click="toggleOverlay(x.lookup_id)">
+			<div>
+				<img src={{x.souq_img}}>
+			</div>
+			<a title={{x.souq_name}} href={{x.souq_url}}>
+				<div class='device-name'>{{x.souq_name | limitTo: 80}}{{x.souq_name.length > 80 ? '...' : ''}}
+				</div>
+			</a>
+			<div class='device-price'>
+				<div class='device-price-old' ng-if="x.souq_oldprice">Price: {{x.souq_oldprice}}</div>
+				<div class='device-price-new'>Spl. Price: {{x.souq_newprice}} </div>
+			</div>
+			<div class='check-overlay' id="check-{{x.lookup_id}}"></div>
+		</div>
+	</div>
+	

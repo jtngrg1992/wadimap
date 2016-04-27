@@ -1,0 +1,95 @@
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/loading-bar.css">
+ <script src="js/angular-min.js"></script>
+ <script src="js/angular-route.js"></script>
+ <script src="js/loading-bar.js"></script>
+ <script src="js/angular-cookies.js"></script>
+ <script src="js/app.js"></script>
+ <script src="js/controllers.js"></script>
+ <script src="js/script.js"></script>
+</head>
+<body ng-app='app' ng-controller="initial" >
+	<div class="whileload" ng-show="$root.loading">
+		<img src="img/status.gif">
+	</div>
+	<div class="header">
+		<div class="cat-select" >
+			<select class="category" ng-model="cat" ng-options="item as item for item in category" ng-change="selCat()"  >
+				<!-- <option  ng-repeat="x in category"> {{x}} </option> -->
+			</select>
+			<button id='upload' onclick="upload()" >+</button>
+			
+		</div>
+		<div class="upload-dialog" hidden>
+			<form enctype="multipart/form-data" method="post" action="upload.php" accept=".csv">
+			<input type="file" id="csv-file" name="csv-file">
+			<input type="submit" id='submit' value='upload'>
+			</form>
+		</div>
+	
+		
+		<div class="login-dialog" hidden >
+			<input type="text" id="user" placeholder="username">
+			<input type="password" id="pwd" placeholder="password">
+			<button ng-click="submit()">Submit</button>
+		</div>
+		<!-- <button id='login' onclick='login()' ng-show=loginstuff>Login</button> -->
+
+		<div class='dropdown' ng-hide=loginstuff><p>User: {{user}} <span><img src="img/gear.png" class="gear" onclick="showDropdown()"></span></p>
+			<ul class='dropdown-content'>
+				<li onclick='switchView()'>Switch source <span><img src="img/arrows.png" class="down-caret"></span></li>
+					<hr class="hr-menu">
+				<li class='dropdown-content2' style="padding-top: 10px;margin-top: 10px;" id="Wadi_UAE" ng-click="switch('wadi_uae')">https://en-ae.wadi.com/</li>
+                <li class='dropdown-content2' ng-click="switch('wadi_uae_uploads')">https://en-ae.wadi.com/ (uploads)</li>
+				<li class='dropdown-content2'  ng-click="switch('wadi_sa')">https://en-sa.wadi.com/</li>
+				<li class='dropdown-content2'  ng-click="switch('wadi_sa_uploads')">https://en-sa.wadi.com/ (uploads)</li>
+                <li>Browse through mappings</li>
+                	<hr class="hr-menu">
+				<li ng-click='logout()'>Logout</li>
+			</ul>
+		</div>
+		
+		<div class="page-jump">
+			<input type="number" id="page" placeholder="jump to page" ng-model="$root.jumpID">
+			<button id="jump-to-page"  ng-click="getWadi(jumpID,source)">Go! </button>
+		</div>
+		
+	</div>
+<div class="container-main" >
+	
+	<div ng-view>
+
+	</div>
+	</div>
+	<!-- <div class="left-pane">
+		
+		<div class="device-name">
+		</div>
+		<div class="device-image">
+		</div>
+		<div class="device-desc">
+		</div>
+		<div class="device-btn">
+			<button id="prev-device">
+			Prev
+		</button>
+		<button id="next-device">
+			Next
+		</button>
+		</div>
+		<div id="pagination">
+		</div>
+	</div>
+	<div class="center-pane">
+
+	</div>
+	
+</div>
+ -->
+</body>
+<!-- Preloader -->
+
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
