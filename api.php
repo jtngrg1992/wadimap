@@ -1,5 +1,5 @@
 <?php
-
+	ob_start();
 	include('connection.php');
 	$response['success']="false";
 	$response['data']=0;
@@ -49,8 +49,9 @@
 				$target="mappings_sa";
 			$sql="select count(*) from $target where Device_ID='$device'";
 			$res=$conn->query($sql);
+			$res=mysqli_fetch_assoc($res);
 
-			if(mysqli_fetch_assoc($res)['count(*)']>0){
+			if($res['count(*)']>0){
 				$id+=1;
 				goto a;
 			}
@@ -73,6 +74,9 @@
 
 		
 		}
+
+		
+		
 		echo json_encode($response);
 		die();
 		}//--ends--
@@ -115,7 +119,7 @@
 				}
 			}
 
-				if($k=='map'){
+				else if($k=='map'){
 					$source=$_GET['source'];
 					if($source=='wadi_uae' || $source=='wadi_uae_uploads')
 						$target='mappings';
@@ -140,6 +144,44 @@
 						else
 							$response['success']="false";
 							$response['data']=mysqli_error($conn);
+				}
+
+				else if($k=="upload"){
+					$target=$_POST['source'];
+					$file=addslashes($_FILES["csv-file"]["tmp_name"]);
+					$searchstring=file_get_contents($file);
+					if($target=="wadi_uae_uploads")
+						$source="wadi_uae";
+					else
+						$source="wadi_sa";
+					$sql="select * from $source where Device_ID in ($searchstring)";
+					print($sql);
+					$res=$conn->query($sql);
+	 				$result=array();
+	 				while ($result[]=mysqli_fetch_assoc($res)){}
+	 				$conn->query("TRUNCATE TABLE $target");
+	 				print_r($result);
+	 				$response['success']="true";
+	 				for ($i=0;$i<count($result);$i++) {
+
+						$sql = "insert ignore into $target (Device_ID,Name,Category,Image,Model,Brand,Color,Url,New_Price,Old_Price)
+				 		values('" . mysqli_real_escape_string($conn, $result[$i]['Device_ID']) .
+								"','" . mysqli_real_escape_string($conn, $result[$i]['Name']) .
+								"','" . mysqli_real_escape_string($conn, $result[$i]['Category']) .
+								"','" . mysqli_real_escape_string($conn, $result[$i]['Image']) .
+								"','" . mysqli_real_escape_string($conn, $result[$i]['Model']) .
+								"','" . mysqli_real_escape_string($conn, $result[$i]['Brand']) .
+								"','" . mysqli_real_escape_string($conn, $result[$i]['Color']) .
+								"','" . mysqli_real_escape_string($conn, $result[$i]['Url']) .
+								"','" . mysqli_real_escape_string($conn, $result[$i]['New_Price']) .
+								"','" . mysqli_real_escape_string($conn, $result[$i]['Old_Price']) . "')";
+						if(!$conn->query($sql)){
+							$response['success']="false";
+							$response['data']=mysqli_error($conn);
+						}
+						}
+						header('location:index.html');
+
 				}
 			}
 			echo json_encode($response);

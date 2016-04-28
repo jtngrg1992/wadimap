@@ -9,6 +9,10 @@ app.config(['$routeProvider',function($routeProvider){
 			templateUrl:'templates/home.html',
 			controller:'deviceLoad'
 		}).
+        when('/upload',{
+            templateUrl:'templates/upload.html',
+            controller:'uploadCTRL'
+        }).
 		otherwise({
 			redirectTO:'/'
 		});
@@ -32,6 +36,7 @@ app.factory('initialLoad', function($http){
         },
         getWadi:function(id,source){
         	url='api.php?getwadi&source='+source+'&id='+id;
+            console.log(url);
         	return $http.get(url);
         },
         getSouq:function(id,source){

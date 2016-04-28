@@ -19,24 +19,8 @@
 			<select class="category" ng-model="cat" ng-options="item as item for item in category" ng-change="selCat()"  >
 				<!-- <option  ng-repeat="x in category"> {{x}} </option> -->
 			</select>
-			<button id='upload' onclick="upload()" >+</button>
-			
 		</div>
-		<div class="upload-dialog" hidden>
-			<form enctype="multipart/form-data" method="post" action="upload.php" accept=".csv">
-			<input type="file" id="csv-file" name="csv-file">
-			<input type="submit" id='submit' value='upload'>
-			</form>
-		</div>
-	
 		
-		<div class="login-dialog" hidden >
-			<input type="text" id="user" placeholder="username">
-			<input type="password" id="pwd" placeholder="password">
-			<button ng-click="submit()">Submit</button>
-		</div>
-		<!-- <button id='login' onclick='login()' ng-show=loginstuff>Login</button> -->
-
 		<div class='dropdown' ng-hide=loginstuff><p>User: {{user}} <span><img src="img/gear.png" class="gear" onclick="showDropdown()"></span></p>
 			<ul class='dropdown-content'>
 				<li onclick='switchView()'>Switch source <span><img src="img/arrows.png" class="down-caret"></span></li>
@@ -45,7 +29,8 @@
                 <li class='dropdown-content2' ng-click="switch('wadi_uae_uploads')">https://en-ae.wadi.com/ (uploads)</li>
 				<li class='dropdown-content2'  ng-click="switch('wadi_sa')">https://en-sa.wadi.com/</li>
 				<li class='dropdown-content2'  ng-click="switch('wadi_sa_uploads')">https://en-sa.wadi.com/ (uploads)</li>
-                <li>Browse through mappings</li>
+				<li> <a href="#/upload" style="color: aliceblue;">Upload product SKUs</a></li>
+                <li ng-click="togMapFlag()">Browse through mappings</li>
                 	<hr class="hr-menu">
 				<li ng-click='logout()'>Logout</li>
 			</ul>
@@ -53,7 +38,7 @@
 		
 		<div class="page-jump">
 			<input type="number" id="page" placeholder="jump to page" ng-model="$root.jumpID">
-			<button id="jump-to-page"  ng-click="getWadi(jumpID,source)">Go! </button>
+			<button id="jump-to-page"  ng-click="getWadi(root.jumpID+root.id,source)">Go! </button>
 		</div>
 		
 	</div>
@@ -63,31 +48,7 @@
 
 	</div>
 	</div>
-	<!-- <div class="left-pane">
-		
-		<div class="device-name">
-		</div>
-		<div class="device-image">
-		</div>
-		<div class="device-desc">
-		</div>
-		<div class="device-btn">
-			<button id="prev-device">
-			Prev
-		</button>
-		<button id="next-device">
-			Next
-		</button>
-		</div>
-		<div id="pagination">
-		</div>
-	</div>
-	<div class="center-pane">
-
-	</div>
 	
-</div>
- -->
 </body>
 <!-- Preloader -->
 

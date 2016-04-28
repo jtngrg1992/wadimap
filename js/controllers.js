@@ -33,6 +33,8 @@ app.controller('initial',function($scope,initialLoad,$cookies,$rootScope){
 		console.log("user: " + $scope.user);
 		$scope.loadCat();	
 	}
+	else
+		window.location.assign("#/");
 	
 	$scope.logout=function(){
 		// $rootScope.loading=true;
@@ -174,6 +176,8 @@ app.controller('deviceLoad',function($cookies,$scope,initialLoad,$rootScope){
 });//deviceLoad controller ends
 
 app.controller('loginCTRL',function($scope,initialLoad,$cookies,$rootScope){
+	if($cookies.get('user'))
+		window.location.assign('#/devices');
 	$scope.submit=function(){
 		$rootScope.loading=true;
 		user=$scope.user;
@@ -184,6 +188,7 @@ app.controller('loginCTRL',function($scope,initialLoad,$cookies,$rootScope){
 			if(response.success=='true'){
 				$scope.user=user;
 				$cookies.put("user",user);
+				location.reload();
 				window.location.assign("#/devices");
 				$rootScope.loading=false;
 				
@@ -193,4 +198,11 @@ app.controller('loginCTRL',function($scope,initialLoad,$cookies,$rootScope){
 			$rootScope.loading=false;
 		});	
 	};
-});//login controller ends
+});//login controller ends'
+
+app.controller('uploadCTRL',function($scope){
+	
+	$scope.test=function(){
+		alert($scope.upsrc)
+	}
+});
